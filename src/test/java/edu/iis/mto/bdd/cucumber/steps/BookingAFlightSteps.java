@@ -12,6 +12,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.iis.mto.bdd.cucumber.pages.Pages;
 
 public class BookingAFlightSteps {
 
@@ -24,7 +25,7 @@ public class BookingAFlightSteps {
 
     @Given("^I want to book a flight$")
     public void givenIWantToBookAFlight() {
-        driver.get("http://localhost:8080/#/welcome");
+        driver.get(Pages.LOGIN_PAGE);
         driver.findElement(By.linkText("Rezerwacja")).click();
     }
 

@@ -12,6 +12,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import edu.iis.mto.bdd.cucumber.pages.Pages;
 
 public class UserAuthenticationSteps {
 
@@ -27,7 +28,7 @@ public class UserAuthenticationSteps {
 
     @When("^(.*) authenticates with a valid email address and password$")
     public void whenJaneAuthenticatesWithAValidEmailAddressAndPassword(String user) {
-        driver.get("http://localhost:8080/#/welcome");
+        driver.get(Pages.LOGIN_PAGE);
         driver.findElement(By.name("email")).sendKeys("janina.kowalska@acme.com");
         driver.findElement(By.name("password")).sendKeys("s3cr3t");
         driver.findElement(By.name("signin")).click();
@@ -40,7 +41,7 @@ public class UserAuthenticationSteps {
 
     @Given("^(.*) has logged on$")
     public void aUserHasLoggedOnAs(String user) {
-        driver.get("http://localhost:8080/#/welcome");
+        driver.get(Pages.LOGIN_PAGE);
         driver.findElement(By.name("email")).sendKeys("janina.kowalska@acme.com");
         driver.findElement(By.name("password")).sendKeys("s3cr3t");
         driver.findElement(By.name("signin")).click();

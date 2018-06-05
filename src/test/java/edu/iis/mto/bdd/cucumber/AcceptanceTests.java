@@ -5,7 +5,7 @@ import org.junit.BeforeClass;
 public class AcceptanceTests {
 
     private static final String GECKODRIVER_NAME = "geckodriver.exe";
-    private static final String GECKO_PATH = "d:\\tools\\geckodriver\\";
+    private static final String GECKO_PATH = "C:\\Users\\student\\Documents\\mto 187684\\geckodriver\\";
 
     @BeforeClass
     public static void init() {
