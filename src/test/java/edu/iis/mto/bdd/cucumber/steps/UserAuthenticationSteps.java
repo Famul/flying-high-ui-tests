@@ -3,10 +3,8 @@ package edu.iis.mto.bdd.cucumber.steps;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.After;
@@ -14,7 +12,8 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import edu.iis.mto.bdd.cucumber.pages.Pages;
+import edu.iis.mto.bdd.cucumber.pages.HomePage;
+import edu.iis.mto.bdd.cucumber.pages.LoginPage;
 import edu.iis.mto.bdd.model.FrequentFlyerMember;
 
 public class UserAuthenticationSteps {
@@ -33,18 +32,14 @@ public class UserAuthenticationSteps {
 
     @When("^(.*) authenticates with a valid email address and password$")
     public void whenJaneAuthenticatesWithAValidEmailAddressAndPassword(FrequentFlyerMember user) {
-        driver.get(Pages.LOGIN_PAGE);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.name("email")));
-        driver.findElement(By.name("email")).sendKeys(user.getEmail());
-        driver.findElement(By.name("password")).sendKeys(user.getPassword());
-        driver.findElement(By.name("signin")).click();
+        LoginPage loginPage = new LoginPage(driver, wait);
+        loginPage.open();
+        loginPage.signInWithCredentials(user.getEmail(), user.getPassword());
     }
 
     @Then("^(.*) should be given access to (?:her|his) account$")
     public void thenTheUserShouldBeGivenAccessToAccount(FrequentFlyerMember user) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("welcome-message")));
-
-        assertThat(driver.findElement(By.id("welcome-message")).getText(), equalTo("Witaj " + user.getFirstName()));
+        assertThat(new HomePage(driver, wait).getWelcomeMessage(), equalTo("Witaj " + user.getFirstName()));
     }
 
     @After
